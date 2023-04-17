@@ -15,11 +15,16 @@ function getSeason( date ) {
     
     if (!date){return 'Unable to determine the time of year!'}
     if (!(typeof date == 'object' && Date.parse(date))){
-      return "Invalid date!"
+      throw new Error("Invalid date!")
     }
-    let x = date.getMonth();
+    try {
+      let d = date.toDateString()
+    } catch (error) {
+      throw new Error("Invalid date!")
+    }
+    let i = date.getMonth();
     let seasons = ["winter","winter","spring","spring","spring","summer","summer","summer","autumn","autumn","autumn","winter"]
-    return seasons[x];
+    return seasons[i];
 }
 
 const springDate = new Date(2010, 11, 20);
